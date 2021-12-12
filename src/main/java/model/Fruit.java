@@ -1,5 +1,4 @@
-package dto;
-
+package model;
 
 public class Fruit {
     private String name;
@@ -89,9 +88,14 @@ public class Fruit {
     public String toString() {
         return "Fruit{" +
                 "name='" + name + '\'' +
-                ", id='" + id + '\'' +
+                ", id=" + id +
                 ", family='" + family + '\'' +
                 ", genus='" + genus + '\'' +
+                ", fat=" + fat +
+                ", sugar=" + sugar +
+                ", calories=" + calories +
+                ", protein=" + protein +
+                ", carbohydrates=" + carbohydrates +
                 '}';
     }
 }

@@ -1,28 +1,20 @@
 package connector;
-
-import dto.Fruit;
-
-
+import model.Fruit;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class FruitsAPIConnector {
+public class FruitAPIConnectorImpl implements FruitAPIConnector {
+    private static final String URL = "https://www.fruityvice.com";
 
-private static final String URL = "https://www.fruityvice.com";
-
+    @Override
     public List<Fruit> getAll() {
 
         List<Fruit> result = new ArrayList<>();
@@ -55,13 +47,14 @@ private static final String URL = "https://www.fruityvice.com";
                         result.add(fruit);
                     }
 
-                    );
+            );
 
         } catch (URISyntaxException | InterruptedException | IOException e) {
             e.printStackTrace();
         }
         return result;
     }
+    @Override
     public Fruit getFruitByName(String name) {
         Fruit fruit = new Fruit();
         try {
@@ -90,9 +83,11 @@ private static final String URL = "https://www.fruityvice.com";
         }
         return fruit;
     }
+    public Fruit getFamillyList(String name) {
+    return null;
+    }
 
-
-
+    @Override
     public List<Fruit> getFruitsByFamily(String name) {
         List<Fruit> result = new ArrayList<>();
         try {
@@ -126,5 +121,4 @@ private static final String URL = "https://www.fruityvice.com";
         }
         return result;
     }
-
 }
