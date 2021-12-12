@@ -23,42 +23,6 @@ public class FruitsAPIConnector {
 
 private static final String URL = "https://www.fruityvice.com";
 
-
-/*private static final String URL = "https://wolnelektury.pl";
-
-    public List<Book> getAll() {
-
-        List<Book> result = new ArrayList<>();
-
-        try {
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(new URI(URL + "/api/books/"))
-                    .GET()
-                    .build();
-
-
-            HttpResponse<String> httpResponse = HttpClient.newHttpClient()
-                    .send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            JSONArray jsonArray = new JSONArray(httpResponse.body());
-            jsonArray.iterator().forEachRemaining(s -> {
-
-                JSONObject jsonObject= (JSONObject) s;
-
-                Book book = new Book();
-                book.setAuthor(jsonObject.getString("author"));
-                book.setTitle(jsonObject.getString("title"));
-                book.setKind(jsonObject.getString("kind"));
-                book.setEpoch(jsonObject.getString("epoch"));
-                book.setGenre(jsonObject.getString("genre"));
-                book.setUrl(jsonObject.getString("url"));
-
-                result.add(book);
-*/
-
-
-
-
     public List<Fruit> getAll() {
 
         List<Fruit> result = new ArrayList<>();
