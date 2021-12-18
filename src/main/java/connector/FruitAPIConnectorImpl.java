@@ -2,6 +2,8 @@ package connector;
 import model.Fruit;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONPointerException;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -111,12 +113,12 @@ public class FruitAPIConnectorImpl implements FruitAPIConnector {
                 fruit.setGenus(object.getString("genus"));
                 JSONObject nutritions = object.getJSONObject("nutritions");
                 fruit.setCalories(nutritions.getFloat("calories"));
-                fruit.setFat(nutritions.getFloat("calories"));
+                fruit.setFat(nutritions.getFloat("fat"));
                 fruit.setProtein(nutritions.getFloat("protein"));
                 result.add(fruit);
             });
 
-        } catch (URISyntaxException | InterruptedException | IOException e) {
+        } catch (URISyntaxException | InterruptedException | IOException |JSONPointerException e) {
             e.printStackTrace();
         }
         return result;

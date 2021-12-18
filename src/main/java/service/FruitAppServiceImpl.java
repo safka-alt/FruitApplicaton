@@ -1,5 +1,4 @@
 package service;
-
 import connector.FruitAPIConnector;
 import entity.FamilyEntity;
 import entity.FruitEntity;
@@ -8,6 +7,7 @@ import model.Familly;
 import model.Fruit;
 import repository.FamillyRepository;
 import repository.FruitRepository;
+import repository.FruitRepositoryImpl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,13 +23,13 @@ public class FruitAppServiceImpl implements FruitAppService{
 
     @Override
     public List<Fruit> getAll() {
+        //ToDo
         //List<Fruit> fruitEntityList = fruitRepository.getAll();
-
         //if (!fruitEntityList.isEmpty()) {
           //return fruitEntityList;
         //}
         //else {
-            System.out.println("Get ALL from API");
+
            List<Fruit> fruitEntityList = fruitAPIConnector.getAll();
            HashMap<String,Long> familyMap = new HashMap<>();
            long i=1;
@@ -40,7 +40,6 @@ public class FruitAppServiceImpl implements FruitAppService{
                     i++;
                     familyEntity.setName(fruit.getFamily());
                     familyEntity.setId(familyMap.get(fruit.getFamily()));
-                    System.out.println("Familly ENtity " +familyEntity.toString());
                     fruitRepository.save(familyEntity);
 
                 }
@@ -49,8 +48,6 @@ public class FruitAppServiceImpl implements FruitAppService{
                 familyEntity.setName(fruit.getFamily());
                 familyEntity.setId(familyMap.get(fruit.getFamily()));
                 fruitEntity.setFamilyEntity(familyEntity);
-
-
                 fruitRepository.save(fruitEntity);
             }
 
@@ -64,17 +61,14 @@ public class FruitAppServiceImpl implements FruitAppService{
         FruitEntity fruitEntity = fruitRepository.getFruitByName(name);
 
         if (fruitEntity == null) {
-            System.out.println("API");
             Fruit fruit = fruitAPIConnector.getFruitByName(name);
             fruitEntity = FruitMapper.mapFruitToFruitEntity(fruit);
             fruitRepository.save(fruitEntity);
-            System.out.println("API - koniec");
             return fruit;
         }
         else
         {
             Fruit fruit = FruitMapper.mapFruitEntityToFruit(fruitEntity);
-            System.out.println("Z bazy : "+fruit.toString());
             return fruit;
         }
 
@@ -85,14 +79,10 @@ public class FruitAppServiceImpl implements FruitAppService{
     @Override
     public List<Fruit> getFruitsByFamily(String famillyName) {
         List<FruitEntity> fruitListbyFamilly = fruitRepository.getFruitByFamilly(famillyName);
-
-        //System.out.println(fruitListbyFamilly.toString());
         List<Fruit> fruitList = null;
-        for (FruitEntity fruitEntity : fruitListbyFamilly)
+        for (FruitEntity fruitEntity:fruitListbyFamilly)
         {
-            System.out.println( fruitEntity.getFamilyEntity());
-            System.out.println(fruitEntity.toString());
-            fruitList.add( FruitMapper.mapFruitEntityToFruit(fruitEntity));
+            fruitList.add(FruitMapper.mapFruitEntityToFruit(fruitEntity));
         }
         return fruitList;
     }
@@ -106,7 +96,6 @@ public class FruitAppServiceImpl implements FruitAppService{
     public Fruit searchFruitByParameters(String columnName, String parameter) {
         FruitEntity fruitEntity = fruitRepository.searchFruitByParameters(columnName,parameter);
         Fruit fruit = FruitMapper.mapFruitEntityToFruit(fruitEntity);
-        System.out.println("Z bazy : "+fruit.toString());
         return fruit;
     }
 }

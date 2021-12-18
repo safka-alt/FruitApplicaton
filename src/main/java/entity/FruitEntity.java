@@ -14,7 +14,7 @@ public class FruitEntity {
     private float calories;
     private float protein;
     private float carbohydrates;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "family_id")
     private FamilyEntity familyEntity;
 

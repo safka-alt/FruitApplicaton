@@ -39,17 +39,14 @@ public class FruitApplication {
                     case 3:
                         System.out.println("Podaj rodzinę owoców");
                         String famillyName = scanner.nextLine();
-                        //List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
-                        List<Fruit> fruitListbyFamilly = fruitAppService.getFruitsByFamily(famillyName);
-                        System.out.println("GetbyFamilly: ");
+                        List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
+                        //List<Fruit> fruitListbyFamilly = fruitAppService.getFruitsByFamily(famillyName);
                         fruitListbyFamilly.stream().forEach(System.out::println);
                         printOptions();
                         break;
                     case 4:
                         printOptionsFruitsOptions();
                         String columnName = scanner.nextLine();
-
-                        //List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
                         printOptionsMinMax();
                         String parameter = scanner.nextLine();
                         System.out.println(columnName);
@@ -71,7 +68,7 @@ public class FruitApplication {
         }
     }
     private static void printOptions(){
-        System.out.println("\n\nPodaj numer akcji, którą chciałbyś wykonać:\n");
+        System.out.println("\n\nPodaj numer opcji, którą chciałbyś wykonać:\n");
         System.out.println("1. Pobierz dane o wszystkich owocach");
         System.out.println("2. Pobierz dane o danym owocu podając nazwę ");
         System.out.println("3. Pokaż owoce należące do danej rodziny ");
@@ -79,9 +76,10 @@ public class FruitApplication {
         System.out.println("0. Zakończ działanie programu");
     }
     private static void printOptionsMinMax(){
-        System.out.println("\nWypierz opcje: \n");
-        System.out.println("1. MIN");
-        System.out.println("2. MAX");
+        System.out.println("\nPodaj opcję: \n");
+        System.out.println("MIN");
+        System.out.println("MAX");
+        System.out.println("");
     }
     private static void printOptionsFruitsOptions(){
         System.out.println("\n Podaj nazwę kolumny: \n");
@@ -89,6 +87,8 @@ public class FruitApplication {
         System.out.println("calories");
         System.out.println("protein");
         System.out.println("sugar");
+
+        System.out.println("");
 
     }
 
