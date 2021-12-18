@@ -1,5 +1,7 @@
 package model;
 
+import javax.persistence.Column;
+
 public class Familly {
     private String name;
 

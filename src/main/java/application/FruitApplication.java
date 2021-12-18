@@ -1,67 +1,65 @@
 package application;
-import entity.FruitEntity;
 import model.Fruit;
 import connector.FruitAPIConnectorImpl;
-import org.hibernate.type.EntityType;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.List;
 import java.util.Scanner;
+import service.FruitAppService;
 
 public class FruitApplication {
-    //toDO
-    //private final FruitAppService appService;
 
-   // public FruitApplication(FruitAppService appService) {
-     //   this.appService = appService;
-    //}
+    private static FruitAppService fruitAppService;
 
-    /*
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("fruits");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
-    FruitEntity fruitEntity = new FruitEntity();
-*/
-
-    public FruitApplication(){
+    public FruitApplication(FruitAppService fruitAppService){
+        this.fruitAppService = fruitAppService;
     }
 
     public static void start() {
 
-        int choice = 0;
+        int choice = 1;
         try {
             Scanner scanner = new Scanner(System.in);
             printOptions();
             FruitAPIConnectorImpl fruitsAPIConnector = new FruitAPIConnectorImpl();
-            while (choice !=4) {
+            while (choice !=0) {
                 choice = Integer.parseInt(scanner.nextLine());
                 switch (choice) {
                     case 1:
-                        List<Fruit> fruitList = fruitsAPIConnector.getAll();
-                        System.out.println("GetALL: ");
+                        List<Fruit> fruitList = fruitAppService.getAll();
                         fruitList.stream().forEach(System.out::println);
                         printOptions();
                         break;
                     case 2:
                         System.out.println("Podaj nazwę owocu");
                         String name = scanner.nextLine();
-                        Fruit fruit = new Fruit();
-                        System.out.println("getFruitByName");
-                        fruit = fruitsAPIConnector.getFruitByName(name);
+                        Fruit fruit = fruitAppService.getFruitByName(name);
                         System.out.println(fruit.toString());
                         printOptions();
                         break;
                     case 3:
                         System.out.println("Podaj rodzinę owoców");
                         String famillyName = scanner.nextLine();
-                        List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
+                        //List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
+                        List<Fruit> fruitListbyFamilly = fruitAppService.getFruitsByFamily(famillyName);
                         System.out.println("GetbyFamilly: ");
                         fruitListbyFamilly.stream().forEach(System.out::println);
                         printOptions();
                         break;
                     case 4:
+                        printOptionsFruitsOptions();
+                        String columnName = scanner.nextLine();
+
+                        //List<Fruit> fruitListbyFamilly = fruitsAPIConnector.getFruitsByFamily(famillyName);
+                        printOptionsMinMax();
+                        String parameter = scanner.nextLine();
+                        System.out.println(columnName);
+
+                        fruitAppService.searchFruitByParameters(columnName,parameter);
+
+                        printOptions();
+                        break;
+
+                    case 0:
                         System.out.println("Zapraszamy ponownie");
                         break;
                     default:
@@ -77,6 +75,22 @@ public class FruitApplication {
         System.out.println("1. Pobierz dane o wszystkich owocach");
         System.out.println("2. Pobierz dane o danym owocu podając nazwę ");
         System.out.println("3. Pokaż owoce należące do danej rodziny ");
-        System.out.println("4. Zakończ działanie programu");
+        System.out.println("4. Pokaż dane o owocach ");
+        System.out.println("0. Zakończ działanie programu");
     }
+    private static void printOptionsMinMax(){
+        System.out.println("\nWypierz opcje: \n");
+        System.out.println("1. MIN");
+        System.out.println("2. MAX");
+    }
+    private static void printOptionsFruitsOptions(){
+        System.out.println("\n Podaj nazwę kolumny: \n");
+        System.out.println("fat");
+        System.out.println("calories");
+        System.out.println("protein");
+        System.out.println("sugar");
+
+    }
+
+
 }

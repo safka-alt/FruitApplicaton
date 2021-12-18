@@ -6,10 +6,8 @@ import javax.persistence.*;
 @Entity
 public class FamilyEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 25, unique = true)
     private String name;
 
     public long getId() {
@@ -22,5 +20,9 @@ public class FamilyEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

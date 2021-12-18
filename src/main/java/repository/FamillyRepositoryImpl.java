@@ -11,7 +11,12 @@ public class FamillyRepositoryImpl implements FamillyRepository{
     }
 
     @Override
-    public FamilyEntity getFamillyByName(String name) {
+    public FamilyEntity getFamillyByName(String name) {return null;}
+
+    @Override
+    public FamilyEntity save(FamilyEntity familyEntity) {
         return null;
     }
+
+
 }
